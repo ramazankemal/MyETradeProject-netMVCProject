@@ -1,0 +1,11 @@
+﻿@model  List<ETradeProject.Models.ProductCountOfBrand>
+
+<h2>Markalar</h2>
+<div class="brands-name">
+    <ul class="nav nav-pills nav-stacked">
+        @foreach (var item in Model)
+        {
+            <li><a href="#"> <span class="pull-right">(@item.ProductCount)</span>@item.Name</a></li>
+        }
+    </ul>
+</div>
