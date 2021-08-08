@@ -1,0 +1,62 @@
+﻿@using ETradeProject.Models;
+@model List<System.Collections.IEnumerable>
+
+<h2 class="title text-center">recommended items</h2>
+
+<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+
+        @foreach (var item in Model.Select((value, index) => new { value, index }))
+        {
+            if (item.index == 0)
+            {
+                <div class="item active">
+                    @foreach (var product in item.value)
+                    {
+                        ProductModel productModel = (ProductModel)product;
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="~/assets/images/home/recommend1.jpg" alt="" />
+                                        <h2>$@productModel.UnitPrice</h2>
+                                        <p>@productModel.Name</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>}
+            else
+            {
+                <div class="item">
+                    @foreach (var product in item.value)
+                    {
+                        ProductModel productModel = (ProductModel)product;
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="~/assets/images/home/recommend3.jpg" alt="" />
+                                        <h2>$@productModel.UnitPrice</h2>
+                                        <p>@productModel.Name</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        
+    </div>
+    <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+        <i class="fa fa-angle-left"></i>
+    </a>
+    <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+        <i class="fa fa-angle-right"></i>
+    </a>
+</div>

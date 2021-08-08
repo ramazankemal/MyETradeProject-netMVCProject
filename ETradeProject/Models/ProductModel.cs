@@ -16,5 +16,6 @@ namespace ETradeProject.Models
         public short UnitsInStock { get; set; }
         public decimal UnitPrice { get; set; }
         public string ImagePath { get; set; }
+        public bool Recommended { get; set; }
     }
 }

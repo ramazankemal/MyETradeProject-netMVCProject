@@ -1,27 +1,24 @@
 ﻿using ETradeProject.Models;
 using ETradeProject.Utilities.WebApiHelper;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ETradeProject.Controllers
 {
-    public class CategoriesController : Controller
+    public class BrandsController : Controller
     {
-        // GET: Categories
+        // GET: Brands
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult GetCategories()
+        public ActionResult GetAllProductCountOfBrand()
         {
-            return PartialView("_partialCategories", ApiManager<CategoryModel>.GetAll("api/categories/getall").Data);
+            return PartialView("_partialGetAllProductCountOfBrand", ApiManager<ProductCountOfBrand>.GetAll("api/brands/getallproductcountofbrand").Data);
         }
     }
 }

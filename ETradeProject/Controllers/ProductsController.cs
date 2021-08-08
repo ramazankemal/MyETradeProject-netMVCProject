@@ -3,6 +3,7 @@ using ETradeProject.Utilities.WebApiHelper;
 using ETradeProject.Utilities.WebApiModels;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -18,17 +19,42 @@ namespace ETradeProject.Controllers
         public ActionResult Index()
         {
           
-            return View(ApiManager<ProductModel>.GetAll("api/products/getall").Data);
+            return View();
         }
 
-        public ActionResult GetCategories()
+        public ActionResult GetAllProduct()
         {
-           return PartialView("_partialCategories", ApiManager<CategoryModel>.GetAll("api/categories/getall").Data);
+            return PartialView("_partialGetAllProduct", ApiManager<ProductModel>.GetAll("api/products/getall").Data);
+        }
+      
+        public ActionResult GetRecommendedProducts()
+        {
+            List<ProductModel> recommendedProducts = ApiManager<ProductModel>.GetAll("api/products/getrecommendedproducts").Data;          
+
+            return PartialView("_partialRecommendedProducts", GroupProducts(recommendedProducts));
         }
 
-        public ActionResult GetAllProductCountOfBrand()
+        // ()=list<product>
+        // *=product
+        // { (***), (***), (**) }
+        private List<IEnumerable> GroupProducts(List<ProductModel> recommendedProducts)
         {
-            return PartialView("_partialGetAllProductCountOfBrand", ApiManager<ProductCountOfBrand>.GetAll("api/brands/getallproductcountofbrand").Data);
+            List<IEnumerable> productsGroupList = new List<IEnumerable>();
+            List<ProductModel> products = null;
+            foreach (var item in recommendedProducts.Select((value, index) => (value, index)))
+            {
+                if (products == null)
+                    products = new List<ProductModel>();
+
+                products.Add(item.value);
+                if (products.Count == 3 || recommendedProducts.Count - 1 == item.index)
+                {
+                    productsGroupList.Add(products);
+                    products = null;
+                }
+            }
+
+            return productsGroupList;
         }
     }
 }

@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -217,7 +218,6 @@
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\ProductCountOfBrand.cs" />
     <Compile Include="Models\ProductModel.cs" />
-    <Compile Include="Models\WebData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\WebApiModels\IWebApiModel.cs" />
     <Compile Include="Utilities\WebApiModels\WebApiDataModel.cs" />
@@ -233,9 +233,10 @@
     <Content Include="Views\Shared\_homeLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Products\_partialCategories.cshtml" />
-    <Content Include="Views\Products\_partialGetAllProductCountOfBrand.cshtml" />
+    <Content Include="Views\Categories\_partialCategories.cshtml" />
+    <Content Include="Views\Brands\_partialGetAllProductCountOfBrand.cshtml" />
+    <Content Include="Views\Products\_partialRecommendedProducts.cshtml" />
+    <Content Include="Views\Products\_partialGetAllProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,7 +246,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Categories\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
