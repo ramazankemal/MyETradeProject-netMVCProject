@@ -19,13 +19,20 @@ namespace ETradeProject.Controllers
         public ActionResult Index()
         {
           
-            return View();
+            return View(ApiManager<ProductModel>.GetAll("api/products/getall").Data);
         }
 
-        public ActionResult GetAllProduct()
+        //public ActionResult GetProducts()
+        //{
+        //    return PartialView("_partialGetProducts", ApiManager<ProductModel>.GetAll("api/products/getall").Data);
+           
+        //}
+
+        public ActionResult GetByCategory(int id)
         {
-            return PartialView("_partialGetAllProduct", ApiManager<ProductModel>.GetAll("api/products/getall").Data);
+            return View("Index",ApiManager<ProductModel>.GetAll("api/products/getbycategory?categoryid="+id).Data);
         }
+       
       
         public ActionResult GetRecommendedProducts()
         {

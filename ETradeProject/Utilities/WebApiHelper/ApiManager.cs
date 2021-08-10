@@ -1,6 +1,7 @@
 ﻿using ETradeProject.Models;
 using ETradeProject.Utilities.WebApiModels;
 using Newtonsoft.Json;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,8 @@ namespace ETradeProject.Utilities.WebApiHelper
             return JsonConvert.DeserializeObject<WebApiDataModel<List<T>>>(content);
            
         }
+
+        
 
         public static WebApiDataModel<T> GetById(string url)
         {

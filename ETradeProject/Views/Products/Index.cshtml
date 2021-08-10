@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<ETradeProject.Models.ProductModel>
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_homeLayout.cshtml";
 }
@@ -107,7 +109,42 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items">
                     <!--features_items-->
-                   @Html.Action("GetAllProduct","Products")
+                    <h2 class="title text-center">Ürünler</h2>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="https://localhost:44375/product-images/pants/product1.jpg" alt="" />
+                                        <h2>$@item.UnitPrice</h2>
+                                        <p>@item.Name</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                                    </div>
+                                    <div class="product-overlay">
+                                        <div class="overlay-content">
+                                            <h2>$@item.UnitPrice</h2>
+                                            <p>@item.Name</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>İstek listesine ekle</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Karşılaştırmak için ekleyin</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <ul class="pagination">
+                        <li class="active"><a href="">1</a></li>
+                        <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li><a href="">&raquo;</a></li>
+                    </ul>
                 </div><!--features_items-->
 
                 <div class="category-tab">
