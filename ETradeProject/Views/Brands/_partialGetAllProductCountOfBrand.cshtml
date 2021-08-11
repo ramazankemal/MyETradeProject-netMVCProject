@@ -5,7 +5,7 @@
     <ul class="nav nav-pills nav-stacked">
         @foreach (var item in Model)
         {
-            <li><a href="#"> <span class="pull-right">(@item.ProductCount)</span>@item.Name</a></li>
+            <li><a href="@Url.Action("GetByBrand","Products",new {id=item.BrandId })"> <span class="pull-right">(@item.ProductCount)</span>@item.Name</a></li>
         }
     </ul>
 </div>

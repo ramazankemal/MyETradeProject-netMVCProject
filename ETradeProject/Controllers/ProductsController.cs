@@ -22,15 +22,16 @@ namespace ETradeProject.Controllers
             return View(ApiManager<ProductModel>.GetAll("api/products/getall").Data);
         }
 
-        //public ActionResult GetProducts()
-        //{
-        //    return PartialView("_partialGetProducts", ApiManager<ProductModel>.GetAll("api/products/getall").Data);
-           
-        //}
+        
 
         public ActionResult GetByCategory(int id)
         {
             return View("Index",ApiManager<ProductModel>.GetAll("api/products/getbycategory?categoryid="+id).Data);
+        }
+
+        public ActionResult GetByBrand(int id)
+        {
+            return View("Index", ApiManager<ProductModel>.GetAll("api/products/getbybrand?brandid=" + id).Data);
         }
        
       
