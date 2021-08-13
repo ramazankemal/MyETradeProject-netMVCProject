@@ -1,57 +1,59 @@
-﻿@using ETradeProject.Models;
-@model List<System.Collections.IEnumerable>
+﻿@model List<ETradeProject.Models.ProductModel>
 
 <h2 class="title text-center">recommended items</h2>
 
 <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
 
-        @foreach (var item in Model.Select((value, index) => new { value, index }))
-        {
-            if (item.index == 0)
+        <div class="item active">
+            @for (int i = 0; i < 3; i++)
             {
-                <div class="item active">
-                    @foreach (var product in item.value)
-                    {
-                        ProductModel productModel = (ProductModel)product;
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="~/assets/images/home/recommend1.jpg" alt="" />
-                                        <h2>$@productModel.UnitPrice</h2>
-                                        <p>@productModel.Name</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
-                                    </div>
-                                </div>
+                <div class="col-sm-4">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="~/assets/images/home/recommend1.jpg" alt="" />
+                                <h2>$@Model[i].UnitPrice</h2>
+                                <p>@Model[i].Name</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
                             </div>
                         </div>
-                    }
-                </div>}
-            else
-            {
-                <div class="item">
-                    @foreach (var product in item.value)
-                    {
-                        ProductModel productModel = (ProductModel)product;
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="~/assets/images/home/recommend3.jpg" alt="" />
-                                        <h2>$@productModel.UnitPrice</h2>
-                                        <p>@productModel.Name</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    }
+                    </div>
                 </div>
             }
+        </div>
+
+
+        @for (int i = 3; i < Model.Count; i++)
+        {
+            if (i % 3 == 0)
+            {
+                @:<div class="item">
+                }
+
+
+                <div class="col-sm-4">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="~/assets/images/home/recommend3.jpg" alt="" />
+                                <h2>$@Model[i].UnitPrice</h2>
+                                <p>@Model[i].Name</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                if ((i + 1) % 3 == 0 || (i + 1) == Model.Count)
+                {
+                @:</div>
+            }
         }
-        
+
     </div>
     <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
         <i class="fa fa-angle-left"></i>

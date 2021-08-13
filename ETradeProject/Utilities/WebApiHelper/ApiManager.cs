@@ -23,12 +23,11 @@ namespace ETradeProject.Utilities.WebApiHelper
             return JsonConvert.DeserializeObject<WebApiDataModel<List<T>>>(content);
            
         }
-
-        
-
-        public static WebApiDataModel<T> GetById(string url)
+       
+        public static WebApiDataModel<T> Get(string url)
         {
-            throw new NotImplementedException();
+            var content = GetContent(url);
+            return JsonConvert.DeserializeObject<WebApiDataModel<T>>(content);
         }
 
         private static string GetContent(string url)

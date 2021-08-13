@@ -21,9 +21,7 @@ namespace ETradeProject.Controllers
           
             return View(ApiManager<ProductModel>.GetAll("api/products/getall").Data);
         }
-
-        
-
+      
         public ActionResult GetByCategory(int id)
         {
             return View("Index",ApiManager<ProductModel>.GetAll("api/products/getbycategory?categoryid="+id).Data);
@@ -33,36 +31,17 @@ namespace ETradeProject.Controllers
         {
             return View("Index", ApiManager<ProductModel>.GetAll("api/products/getbybrand?brandid=" + id).Data);
         }
+
+        public ActionResult GetProductDetails(int id)
+        {
+            return View("ProductDetails", ApiManager<ProductDetail>.Get("api/products/getproductdetails?productid=" + id).Data);
+        }
        
       
         public ActionResult GetRecommendedProducts()
         {
-            List<ProductModel> recommendedProducts = ApiManager<ProductModel>.GetAll("api/products/getrecommendedproducts").Data;          
-
-            return PartialView("_partialRecommendedProducts", GroupProducts(recommendedProducts));
+            return PartialView("_partialRecommendedProducts", ApiManager<ProductModel>.GetAll("api/products/getrecommendedproducts").Data);
         }
-
-        // ()=list<product>
-        // *=product
-        // { (***), (***), (**) }
-        private List<IEnumerable> GroupProducts(List<ProductModel> recommendedProducts)
-        {
-            List<IEnumerable> productsGroupList = new List<IEnumerable>();
-            List<ProductModel> products = null;
-            foreach (var item in recommendedProducts.Select((value, index) => (value, index)))
-            {
-                if (products == null)
-                    products = new List<ProductModel>();
-
-                products.Add(item.value);
-                if (products.Count == 3 || recommendedProducts.Count - 1 == item.index)
-                {
-                    productsGroupList.Add(products);
-                    products = null;
-                }
-            }
-
-            return productsGroupList;
-        }
+        
     }
 }
