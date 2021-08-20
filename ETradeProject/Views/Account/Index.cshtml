@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_homeLayout.cshtml";
+}
+
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form">
+                        <!--login form-->
+                        <h2>Hesabınıza giriş yapın</h2>
+                        <form action="#">
+                            <input name="email" type="email" placeholder="E-posta adresi" />
+                            <input name="password" type="password" placeholder="Şifre" />
+                            <span>
+                                <input type="checkbox" class="checkbox">
+                                Oturumumu açık tut
+                            </span>
+                            <button type="submit" class="btn btn-default">Giriş</button>
+                        </form>
+                    </div><!--/login form-->
+                </div>
+            }
+            <div class="col-sm-1">
+                <h2 class="or">VEYA</h2>
+            </div>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post,new {id="registerForm"}))
+            {
+                <div class="col-sm-4">
+                    <div class="signup-form">
+                        <!--sign up form-->
+                        <h2>Yeni Kullanıcı Kaydı!</h2>
+                        <form action="#">
+                            <input name="firstName" type="text" placeholder="İsim" />
+                            <input name="lastName" type="text" placeholder="Soyisim" />
+                            <input name="email" type="email" placeholder="E-posta adresi" />
+                            <input name="password" type="password" placeholder="Şifre" />
+                            <button type="submit" class="btn btn-default">Üye Ol</button>
+                        </form>
+                    </div><!--/sign up form-->
+                </div>
+            }
+        </div>
+    </div>
+</section><!--/form-->
+
+@section script{
+    
+    @*<script>
+        $("#registerForm").submit(function (e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (response) {
+                    var data = $.parseJSON(response);
+                    localStorage.setItem("token", data.token);
+                }
+            });  
+        });
+    </script>*@
+    
+    
+    }

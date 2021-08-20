@@ -15,10 +15,10 @@ namespace ETradeProject.Controllers
 {
     public class ProductsController : Controller
     {
+        
         // GET: Products
         public ActionResult Index()
         {
-          
             return View(ApiManager<ProductModel>.GetAll("api/products/getall").Data);
         }
       

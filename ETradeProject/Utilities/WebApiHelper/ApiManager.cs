@@ -7,7 +7,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 
 namespace ETradeProject.Utilities.WebApiHelper
 {
@@ -28,6 +32,30 @@ namespace ETradeProject.Utilities.WebApiHelper
         {
             var content = GetContent(url);
             return JsonConvert.DeserializeObject<WebApiDataModel<T>>(content);
+        }
+
+        public static WebApiDataModel<T> Login(IModel model,string url)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(ConfigurationManager.AppSettings["apiBaseUrl"]);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync(url, model).Result;
+                WebApiDataModel<T> accessToken = null;
+                //JsonResult result = new JsonResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    
+                    accessToken = JsonConvert.DeserializeObject<WebApiDataModel<T>>(response.Content.ReadAsStringAsync().Result);
+                    //result = this.Json(response.Content.ReadAsStringAsync().Result);
+                    
+                }
+
+                return accessToken;
+          
+            }
         }
 
         private static string GetContent(string url)
